@@ -1,0 +1,89 @@
+#content{
+  display: flex;
+  align-items:center;
+  justify-content:center;
+}
+
+#content #user_info{
+  width:600px;
+  height:600px;
+  border:1px white solid;
+  background-color: rgba(35,169,187,0.6);
+  box-shadow:0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
+  border-radius:10px;
+  display: flex;
+  align-items:center;
+  justify-content:center;
+}
+
+#user_info div{
+  width:360px;
+}
+/* 大标题的大小和颜色 */
+#title{
+  color:#f40;
+  font-size:40px;
+  text-align: center;
+}
+#user_info div > p{
+  margin-top:10px;
+}
+#user_info div > p input[type="text"]{
+  width:350px;
+  height:35px;
+  padding-left:10px;
+  outline-style: none;
+  
+}
+#user_info div > p input[type="password"]{
+  width:350px;
+  height:35px;
+  padding-left:10px;
+  outline-style: none;
+}
+#user_info input:focus{
+  border-color:#f40;
+}
+/* 单选框文字为白色 */
+#user_info div p.radio_gender{
+  color:white;
+}
+
+/* 错误提示的样式 */
+#user_info div p.error{
+  height:12px;
+  line-height:12px;
+  font-size:10px;
+  color:red;
+}
+
+/* 提交按钮 */
+#user_info div button{
+  width:350px;
+  height:35px;
+
+  background-color: #f40;
+  color:white;
+  font-size:20px;
+  border:none;
+  text-decoration: none;
+  outline-style:none;
+  cursor:pointer;
+}
+#user_info div button:hover{
+  background-color: rgba(255,64,0,0.7);
+}
+
+/* 跳转至登入 */
+#switch_login{
+  display: flex;
+  align-items:center;
+  justify-content:center;
+}
+#switch_login a{
+  text-decoration:none;
+  color:white;
+}
+#switch_login a:hover{
+  color:#f40;
+}

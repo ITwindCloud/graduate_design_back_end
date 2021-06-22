@@ -1,0 +1,57 @@
+{% extends "./login.html" %}
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'ticket/css/login_register_base.css' %}">
+<link rel="stylesheet" href="{% static 'ticket/css/register.css' %}">
+{% endblock %}
+
+
+{% block window %}
+<div id="user_info">
+  
+  <div class="right">
+    <p id="title">注&nbsp;&nbsp;&nbsp;册</p>
+    <p>
+      <input type="text" name="name" placeholder="可以随意指定一个你喜欢的昵称" v-model="name">
+      <p v-if="is_name_error" class="error">[[ name_error  ]]</p>
+    </p>
+    <p class="radio_gender">
+      <input type="radio" name="gender" value="male" v-model="gender" checked>&nbsp;&nbsp;男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="radio" name="gender" value="female" v-model="gender">&nbsp;&nbsp;女
+    </p>
+
+    <p>
+      <input type="text" name="tel" placeholder="电话号码(可作为登入使用)" v-model="tel">
+      <p v-if="is_tel_error" class="error">[[ tel_error ]]</p>
+    </p>
+    <p>
+      <input type="text" name="email" placeholder="邮箱(可作为登入和找回密码使用)" v-model="email">
+      <p v-if="is_email_error" class="error">[[ email_error ]]</p>
+    </p>
+    <p>
+      <input type="password" name="pd1" placeholder="密码" v-model="pd1">
+      <p v-if="is_pd1_error" class="error">[[ pd1_error ]]</p>
+    </p>
+    <p>
+      <input type="password" name="pd2" placeholder="二次输入密码" v-model="pd2">
+      <p v-if="is_pd2_error" class="error">[[ pd2_error ]]</p>
+      <p v-if="is_pd12_error" class="error">[[ pd12_error ]]</p>
+    </p>
+    <p>
+      <input type="text" name="abbr" placeholder="地址(可选，可以为您提供更好的服务)" v-model="abbr">
+    </p>
+    <p>
+      <button v-on:click="submit">立即注册</button>
+    </p>
+    <p style="color:white;" id="switch_login">
+      已有账号? &nbsp;&nbsp;<a href="{% url 'ticket:login' %}">点击去登录!</a>
+    </p>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block script_vue %}
+<script src="{% static 'ticket/js/register.js' %}"></script>
+{% endblock %}

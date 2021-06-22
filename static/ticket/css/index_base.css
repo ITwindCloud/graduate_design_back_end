@@ -1,0 +1,223 @@
+*{
+  margin:0;
+  padding:0;
+  font-size:14px;
+}
+
+/* ---------标题---------- */
+#title img{
+  width:200px;
+  margin-left:30px;
+  margin-top:10px;
+}
+
+/* --------导航栏--------- */
+#navi{
+  width:100%;
+  height:40px;
+  background-color: #036980;
+}
+#navi ul{
+  padding:0;
+  margin:0;
+  list-style-type: none;
+  padding-left:100px;
+  padding-right:100px;
+}
+
+#navi ul li{
+  display: inline-block;
+  
+  margin-left:20px;
+  height:100px;
+
+  height:40px;
+  line-height:40px;
+
+}
+/* 链接样式设置 */
+#navi ul li a{
+  color:white;
+  font-size:16px;
+  text-decoration: none;
+}
+
+/* 浮动分栏 */
+#navi ul li.navi-home{
+  float:left;
+}
+#navi ul li.navi-info{
+  float:right;
+}
+
+/* -------旅游宣传与预订--------- */
+/* #reserve{
+  position: relative;
+  height:480px;
+} */
+
+/* 国内机票导航栏 */
+#order{
+  position:absolute;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  top:100px;
+  width:100%;
+
+}
+#reserve #order ul.ticket{
+  padding:0;
+  margin:0;
+  list-style-type:none;
+  background-color:rgba(0,0,0,0.75);
+  width:900px;
+  height:44px;
+  border-radius: 5px;
+
+  display:flex;
+  align-items:center;
+  justify-content: center;
+}
+#reserve #order ul.ticket li{
+  display:inline-block;
+  color:white;
+  font-size:18px;
+
+  height:44px;
+  line-height:44px;
+  width:20%;
+
+  text-align: center;
+}
+#reserve #order ul.ticket li:hover{
+  border-radius:5px;
+  background-color:rgba(0,0,0,.9);
+}
+#reserve #order ul.ticket li.select{
+  border-radius:5px;
+  background-color:rgba(149,194,237,0.6);
+}
+/* 热门城市推荐 */
+#hot-cities{
+  width:100%;
+}
+#hot-cities span{
+  display: inline-block;
+  width:19%;
+  height:30px;
+  line-height:30px;
+  text-align:center;
+}
+#order ul.cities{
+  /* display:inline-block; */
+  padding:0;
+  margin:0;
+  list-style-type:none;
+  /* background-color:rgba(125, 165, 224, 0.75); */
+  width:80%;
+  height:30px;
+
+  display:inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+#order ul.cities li{
+  display:inline-block;
+  line-height: 30px;
+  text-align:center;
+  width:10%;
+}
+#order ul.cities li:hover{
+  background-color:rgba(125, 165, 224, 0.75);
+  border-radius: 5px;
+}
+
+/* 用户查询信息的输入 */
+#searching_info{
+  width:900px;
+}
+/* 滑条 */
+#searching_info p.three_lines{
+  margin-bottom: 3px;
+}
+#searching_info .three_lines span{
+  display: inline-flex;
+  height:5px;
+  width:33%;
+  /* border-radius: 1px; */
+}
+#searching_info .three_lines span.cur_info_input{
+  background-color: teal;
+
+}
+/* 三个输入框 */
+#searching_info p.three_input{
+  box-shadow: 10px 10px 5px rgba(0,0,0,0.2);
+  margin-bottom: 20px;
+}
+#searching_info input{
+  display: inline-flex;
+
+  width:33%;
+  height:60px;
+  /* border:1px solid blue; */
+  font-size:20px;
+  padding-left:20px;
+  border-radius: 4px;
+  border:0;
+}
+#searching_info input:focus{
+  border:0;
+  outline: none;
+  color:royalblue;
+}
+/* 按钮设置 */
+#searching_info .submit{
+  width:100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#searching_info button{
+  color:white;
+  font-size:24px;
+  letter-spacing: 10px;
+  background-image: linear-gradient(-90deg, #f70 0%, #FFA50A 100%);
+  box-shadow: 0 4px 16px 0 rgb(255 102 0 / 32%);
+  width:176px;
+  height:56px;
+  /* background-color:#f40; */
+  border-radius: 30px;
+  outline:none;
+  border:0;
+  cursor:hand;
+  
+}
+
+
+/* -----购票流程------- */
+
+/* ”订票流程“四个字 */
+
+/* 四个步骤 */
+
+/* ------六重服务保障--------- */
+#security{
+  margin-top:20px;
+  width:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor:hand;
+}
+
+/* 版权声明 */
+#copyright{
+  height:30px;
+  text-align: center;
+  line-height:30px;
+  color:white;
+  background-color: teal;
+}

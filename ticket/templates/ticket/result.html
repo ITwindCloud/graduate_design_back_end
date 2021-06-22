@@ -1,0 +1,215 @@
+{% extends "./index.html" %}
+{% load static %}
+{% load result %}
+
+{% block title %}
+<title>翱游航空-机票查询结果</title>
+{% endblock %}
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{% static 'ticket/css/index_base.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'ticket/css/result.css' %}">
+{% endblock %}
+
+{% block advertisement %}
+{% endblock %}
+
+{% block result %}
+
+<div id="result">
+  <div>
+    <p class="result-title"><span>单程:</span><strong>{{ start }}</strong><span>至</span><strong>{{ end }}</strong><span>{{ date }}</span><span>星期{{ date.weekday | chinese_weekday }}</span></p>
+    <p class="base-for-order"><span>飞机起飞早晚</span><span class="select">价格优先</span></p>
+    <div id="ticket-menu">
+      <ul>
+        {% for t in tickets %}
+        <li>
+          <div class="start-end-time">
+            <div class="time-and-airport">
+              <div class="warning">临近起飞</div>
+              <div class="time">{{ t.start_time }}</div>
+              <div class="airport">{{ t.start_airport.name }}</div>
+            </div>
+            <div class="time-arrow">
+              <div class="arrow"><span></span></div>
+            </div>
+            <div class="time-and-airport">
+              <div class="time">{{ t.end_time }}</div>
+              <div class="airport">{{ t.end_airport.name }}</div>
+            </div>
+          </div>
+          <div class="airline">
+            <div class="airline-name">{{ t.airline }}</div>
+            <div class="airplane-name">{{ t.catagory }}</div>
+          </div>
+          <div class="price-order">
+            <p class="best-price">
+              最低价格
+            </p>
+            <div>
+              <div class="price-discount">
+                <div class="price">
+                  <span>￥</span><strong>{{ t.price }}</strong>
+                </div>
+                <div class="discount">{{ t.discount }}折</div>
+              </div>
+              <div class="order-btn">
+                <div>点击订票</div>
+              </div>
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="transfer-box">
+  <div>
+    <p class="title">中转方案推荐</p>
+    <ul>
+      <li>
+        <div class="start-end-time">
+          <div class="time-and-airport">
+            <div class="time">20:45</div>
+            <div class="airport">浦东国际机场T2</div>
+          </div>
+          <div class="time-arrow">
+            <div class="arrow"><span></span></div>
+          </div>
+          <div class="time-and-airport">
+            <div class="time">23:20</div>
+            <div class="airport">北京大兴国际机场</div>
+          </div>
+        </div>
+        <div class="middle-time">
+          <div class="juzhong">
+            <p>中转3小时14分</p>
+            <p><span>转1次</span></p>
+          </div>
+        </div>
+        <div class="start-end-time">
+          <div class="time-and-airport">
+            <div class="time">20:45</div>
+            <div class="airport">浦东国际机场T2</div>
+          </div>
+            <div class="time-arrow">
+              <div class="arrow"><span></span></div>
+            </div>
+            <div class="time-and-airport">
+              <div class="time">23:20</div>
+            <div class="airport">北京大兴国际机场</div>
+          </div>
+        </div>
+        <div class="price-order">
+          <div>
+            <div class="price-discount">
+              <div class="price">
+                <span>￥</span><strong>455</strong>
+              </div>
+              <div class="discount">8.9折</div>
+            </div>
+            <div class="order-btn">
+              <div>点击订票</div>
+            </div>
+          </div>
+        </div>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div id="price-trend">
+  <div>
+    <p class="title">价格趋势图</p>
+    <div class="pic-note">
+      <div class="pic">
+        <img src="{{ min_img_url }}" alt="最低价格走势图" title="最低价格走势图" width=600>
+        <p>最低价格走势图</p>
+      </div>
+      <div class="pic">
+        <img src="{{ mean_img_url }}" title="平均价格走势图" alt="平均价格走势图" width=600>
+        <p>平均价格走势图</p>
+      </div>
+      <div class="pic">
+        <img src="{{ max_img_url }}" alt="最高价格走势图"  title="最高价格走势图" width=600>
+        <p>最高价格走势图</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block order_process %}
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'ticket/js/index_active_pic.js' %}"></script>
+<script>
+  new Vue({
+      delimiters:["[[","]]"],
+      el:"#order",
+      data:{
+        start:"{{ start }}",
+        end:"{{ end }}",
+        start_date:"{{ date_str }}",
+        test:"",
+        dates:[],
+        date_args:[],
+        num:-1,
+        date_num:0,
+      },
+      mounted(){
+        // this.today_date_format()
+        this.start_date_change()
+      },
+      methods:{
+        today_date_format(){
+          var today = new Date();
+          var year = today.getFullYear(),month = today.getMonth(),day = today.getDate();
+          month+=1;
+          if(month<10){
+            month = "0"+month;
+          }
+          if(day<10){
+            day = "0"+day;
+          }
+          var str_date = year + "-" + month + "-" + day;
+          this.start_date = str_date;
+          this.start_date_change();
+        },//today_date_format
+        start_date_change(){
+          axios({
+            // url:"{% url 'ticket:four-dates' %}",
+            url:"/ticket/four-dates/",
+            method:"get",
+            params:{
+              "date":this.start_date
+            }
+          }).then(res=>{
+            console.log(res.data.data);
+            this.dates = res.data.data.dates;
+            this.date_args = res.data.data.date_args;
+            this.date_num = res.data.data.select;
+            this.start_date = res.data.data.start_date;
+          },function(){
+            console.log("Failure");
+          })
+        },//start_date_change
+        change_num(num){
+          this.num = num;
+        },//change_num
+        click_start_date(x){
+          this.start_date = x;
+          this.start_date_change();
+        },//click_start_date
+        click_end_city(x){
+          this.end = x;
+        },//click_end_city
+      }
+    })
+</script>
+{% endblock %}
+

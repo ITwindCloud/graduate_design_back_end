@@ -1,0 +1,230 @@
+{% load static %}
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="keys" content="机票预订,遨游航空">
+  <base href="#">
+  {% block title %}
+  <title>翱游航空-首页</title>
+  {% endblock %}
+  <script src="{% static 'ticket/js/axios.min.js' %}"></script>
+  <script src="{% static 'ticket/js/vue.min.js' %}"></script>
+  <script src="{% static 'ticket/js/vue-resource.min.js' %}"></script>
+  {% block link %}
+  <link rel="stylesheet" type="text/css" href="{% static 'ticket/css/index.css' %}">
+  {% endblock %}
+</head>
+<body>
+  <div id="title">
+    <img src="{% static 'ticket/images/title.png' %}" title="欢迎来到翱游航空机票预订平台" alt="欢迎来到翱游航空机票预订平台">
+  </div>
+
+  <div id="navi">
+    <ul>
+      <li class="navi-home"><a href="{% url 'ticket:index' %}">首页</a></li>
+      <li class="navi-info"><a href="#">订单</a></li>
+      <li class="navi-info"><a href="#">我的信息</a></li>
+      <li class="navi-info"><a href="{% url 'ticket:register' %}">注册</a></li>
+      <li class="navi-info"><a href="{% url 'ticket:login' %}">登入</a></li>
+    </ul>
+
+  </div>
+
+  <div id="reserve">
+    {% block advertisement %}
+    <div id="advertisement">
+      <img class="" src="{% static 'ticket/images/shanghai.jpg' %}" alt="上海陆家嘴">
+      <img class="image_hidden" src="{% static 'ticket/images/island.jpg' %}" alt="太平洋小岛">
+      <img class="image_hidden" src="{% static 'ticket/images/settingsun.jpg' %}" alt="大海的日落">
+    </div>
+    {% endblock %}
+    <div id="order">
+      <div>
+        <ul class="ticket">
+          <li>国内机票</li>
+          <template v-if="date_num==0">
+            <li class="select" v-on:click="click_start_date(date_args[0])">[[ dates[0] ]]</li>
+          </template>
+          <template v-else>
+            <li v-on:click="click_start_date(date_args[0])">[[ dates[0] ]]</li>
+          </template>
+          <template v-if="date_num==1">
+            <li class="select" v-on:click="click_start_date(date_args[1])">[[ dates[1] ]]</li>
+          </template>
+          <template v-else>
+            <li v-on:click="click_start_date(date_args[1])">[[ dates[1] ]]</li>
+          </template>
+          <li v-on:click="click_start_date(date_args[2])">[[ dates[2] ]]</li>
+          <li v-on:click="click_start_date(date_args[3])">[[ dates[3] ]]</li>
+        </ul>
+        <div id="hot-cities">
+          <span>热门城市推荐</span>
+          <ul class="cities">
+            <li v-on:click="click_end_city('北京')">北京</li>
+            <li v-on:click="click_end_city('上海')">上海</li>
+            <li v-on:click="click_end_city('深圳')">深圳</li>
+            <li v-on:click="click_end_city('广州')">广州</li>
+            <li v-on:click="click_end_city('南京')">南京</li>
+            <li v-on:click="click_end_city('成都')">成都</li>
+            <li v-on:click="click_end_city('武汉')">武汉</li>
+            <li v-on:click="click_end_city('杭州')">杭州</li>
+            <li v-on:click="click_end_city('三亚')">三亚</li>
+            <li v-on:click="click_end_city('重庆')">重庆</li>
+          </ul>
+        </div>
+        
+        <div id="searching_info">
+          <p class="three_lines">
+            <span v-if="num==1" class="cur_info_input"></span> 
+            <span v-else></span>
+            <span v-if="num==2" class="cur_info_input"></span> 
+            <span v-else></span>
+            <span v-if="num==3" class="cur_info_input"></span> 
+            <span v-else></span>
+          </p>
+          <p class="three_input">
+            <input v-on:focus="change_num(1)" type="text" v-on:blur="change_num(-1)" v-model="start" placeholder="出发地">
+            <input v-on:focus="change_num(2)" type="text" v-on:blur="change_num(-1)" v-model="end" placeholder="目的地">
+            <input v-on:focus="change_num(3)" type="date" v-on:blur="change_num(-1)" v-on:change="start_date_change" v-model="start_date">
+          </p>
+          <p class="submit">
+            <button>搜索</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% block result %}
+  
+  {% endblock %}
+
+
+  {% block order_process %}
+  <div id="order_process">
+    <p class="process-title">
+      订票流程
+    </p>
+    <ul>
+      <li>
+        <div>
+          <span class="icon" align="center" style="background-image: url('/static/ticket/images/放大镜.jpg');"></span>
+          <span class="instruction">
+            <p class="instruction-title">航班查询</p>
+            <p class="instruction-content">选择出行航班</p>
+          </span>
+        </div> 
+      </li>
+      <li>
+        <div>
+          <span class="icon" align="center" style="background-image: url('/static/ticket/images/提交订单.jpg');"></span>
+          <span class="instruction">
+            <p class="instruction-title">提交订单</p>
+            <p class="instruction-content">登记乘机人和联系人</p>
+          </span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="icon" align="center" style="background-image: url('/static/ticket/images/在线支付.jpg');"></span>
+          <span class="instruction">
+            <p class="instruction-title">在线支付</p>
+            <p class="instruction-content">支付机票款</p>
+          </span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="icon" align="center" style="background-image: url('/static/ticket/images/无需取票.jpg');"></span>
+          <span class="instruction">
+            <p class="instruction-title">无需取票</p>
+            <p class="instruction-content">凭电子客票号换登机牌</p>
+          </span>
+        </div>
+    </ul>
+    
+  </div>
+  {% endblock %}
+
+  {% block security %}
+  <div id="security">
+    <img src="{% static 'ticket/images/六重保障.png' %}" alt="">
+  </div>
+  {% endblock %}
+
+  <div id="copyright">
+    &copy; 苍穹科技
+  </div>
+
+  
+  {% block script %}
+  <script src="{% static 'ticket/js/index_active_pic.js' %}"></script>
+  <script src="{% static 'ticket/js/index_input_line.js' %}"></script>
+  <script>
+    new Vue({
+      delimiters:["[[","]]"],
+      el:"#order",
+      data:{
+        start:"",
+        end:"",
+        start_date:"",
+        test:"",
+        dates:[],
+        date_args:[],
+        num:-1,
+        date_num:0,
+      },
+      mounted(){
+        this.today_date_format()
+      },
+      methods:{
+        today_date_format(){
+          var today = new Date();
+          var year = today.getFullYear(),month = today.getMonth(),day = today.getDate();
+          month+=1;
+          if(month<10){
+            month = "0"+month;
+          }
+          if(day<10){
+            day = "0"+day;
+          }
+          var str_date = year + "-" + month + "-" + day;
+          this.start_date = str_date;
+          this.start_date_change();
+        },//today_date_format
+        start_date_change(){
+          axios({
+            // url:"{% url 'ticket:four-dates' %}",
+            url:"/ticket/four-dates/",
+            method:"get",
+            params:{
+              "date":this.start_date
+            }
+          }).then(res=>{
+            console.log(res.data.data);
+            this.dates = res.data.data.dates;
+            this.date_args = res.data.data.date_args;
+            this.date_num = res.data.data.select;
+            this.start_date = res.data.data.start_date;
+          },function(){
+            console.log("Failure");
+          })
+        },//start_date_change
+        change_num(num){
+          this.num = num;
+        },//change_num
+        click_start_date(x){
+          this.start_date = x;
+          this.start_date_change();
+        },//click_start_date
+        click_end_city(x){
+          this.end = x;
+        },//click_end_city
+      }
+    })
+  </script>
+  {% endblock %}
+  
+</body>
+
+</html>
