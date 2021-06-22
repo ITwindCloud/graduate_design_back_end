@@ -48,7 +48,7 @@ python manage.py runserver 8000
 - 用户信息
 
 ### 2. 预测模型训练数据
-&ensp;&ensp;课题选取来自于Kaggle的Coupon Purchase Prediction比赛所提供的数据。据官网说明，数据是由日本的一家日本国内领先的联合优惠券网站——Recruit Ponpare提供，其网站首页如图6.24所示，它为从小到热瑜伽，大到美食寿司，再到盛夏演唱会门票都提供了很大的折扣。赛题为参赛者提供了该网站22873名用户一年的交易数据，训练数据集的时间跨度从2011年7月1日到2012年6月23日，测试数据集的时间跨度为2012年6月24日到2012年6月30日。数据类型十分丰富，覆盖全面，机票系统用的到只有三个CSV文件——user_list.csv、coupon_list_train.csv、coupon_visit_train.csv。
+&emsp;&emsp;课题选取来自于Kaggle的Coupon Purchase Prediction比赛所提供的数据。据官网说明，数据是由日本的一家日本国内领先的联合优惠券网站——Recruit Ponpare提供，其网站首页如图6.24所示，它为从小到热瑜伽，大到美食寿司，再到盛夏演唱会门票都提供了很大的折扣。赛题为参赛者提供了该网站22873名用户一年的交易数据，训练数据集的时间跨度从2011年7月1日到2012年6月23日，测试数据集的时间跨度为2012年6月24日到2012年6月30日。数据类型十分丰富，覆盖全面，机票系统用的到只有三个CSV文件——user_list.csv、coupon_list_train.csv、coupon_visit_train.csv。
 <img src="material/kaggle.png" width="60%" alt="kaggle">
 
 > 访问官网查看数据更多信息，[点这](https://www.kaggle.com/c/coupon-purchase-prediction)
@@ -116,7 +116,7 @@ python manage.py runserver 8000
 </tr>
 </table>
 
-&ensp;&ensp;预测模型的训练过程可以进入data/train_model.ipynb查看详细的过程，训练模型在保存在了**rfc.joblib**。评估结果：
+&emsp;&emsp;预测模型的训练过程可以进入data/train_model.ipynb查看详细的过程，训练模型在保存在了**rfc.joblib**。评估结果如下：
 <table>
 <tr> 
   <th>指标</th>
@@ -132,9 +132,10 @@ python manage.py runserver 8000
 </tr>
 </table>
 
-> 特征重要性的玫瑰图
+> 特征重要性的玫瑰图  
+
 ![玫瑰图](material/各个特征重要性的玫瑰图.jpg)
 
 ## 其他补充
-- 其他三大算法都包含在代码
-- 后端有部分文件时多余，比如模板文件（html）
+- 其他三大算法都包含在代码在，这里不再赘述
+- 后端有部分文件是多余，比如模板文件（html）
