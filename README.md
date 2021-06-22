@@ -55,14 +55,14 @@ python manage.py runserver 8000
 
 ## 优惠价预测模型
 &ensp;&ensp;预测模型是一个简单的二分类问题，目标是预测某用户浏览某价格机票时是否适合投放优惠券，如果投放优惠券有一定概率促进用户的购买，那么就投放一定折扣的优惠券（折扣率尽量最低）。  
-提取了六个特征来作为影响因素用户消费的因素，这些特征的详细信息如下：    
- 特征名|描述|类型|长度|精度|注释  
- :-:| :-:| :-:| :-:| :-:| :-:
+提取了六个特征来作为影响因素用户消费的因素，这些特征的详细信息如下：      
+ 特征名|描述|类型|长度|精度|注释    
+ :-:| :-:| :-:| :-:| :-:| :-:  
 id|用户的ID|number|10|0|   
-price_rate|优惠券折扣率|number|4|0|
-price|商品价格|number|10|0|
-day_in_month|月内第几天|number|2|0|
-day_in_week|周几|number|2|0|
+price_rate|优惠券折扣率|number|4|0|  
+price|商品价格|number|10|0|  
+day_in_month|月内第几天|number|2|0|  
+day_in_week|周几|number|2|0|  
 is_weekday|是否是周末|number|1|0|1：是周末，0：不是周末
 
 &ensp;&ensp;预测模型的训练过程可以进入data/train_model.ipynb查看详细的过程，训练模型在保存在了**rfc.joblib**。评估结果：
